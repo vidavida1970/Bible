@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#243653"/>
+      <stop offset="55%" stop-color="#8b7184"/>
+      <stop offset="100%" stop-color="#f0b56b"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101827" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#09111d" stop-opacity="0.72"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-opacity="0.55"/></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <circle cx="865" cy="205" r="78" fill="#ffdca3" opacity="0.9"/>
+  <path d="M0 430 L170 315 L330 410 L530 260 L720 420 L910 300 L1200 455 L1200 630 L0 630 Z" fill="#283446" opacity="0.78"/>
+  <path d="M0 505 L220 390 L420 515 L650 345 L840 505 L1040 365 L1200 455 L1200 630 L0 630 Z" fill="#182330"/>
+  <rect width="1200" height="630" fill="url(#shade)"/>
+  <text x="86" y="92" fill="#f7d68c" font-size="26" font-weight="700" font-family="Noto Sans KR, Arial, sans-serif" letter-spacing="3">TODAY'S WORD · 오늘의 말씀</text>
+  <g fill="#ffffff" font-family="Noto Serif KR, Noto Sans KR, Arial, sans-serif" font-weight="700" filter="url(#shadow)">
+    <text x="86" y="190" font-size="48">그러므로 나의 사랑하는 형제자매 여러분,</text>
+    <text x="86" y="260" font-size="48">굳게 서서 흔들리지 말고,</text>
+    <text x="86" y="330" font-size="48">주님의 일을 더욱 많이 하십시오.</text>
+    <text x="86" y="400" font-size="42">여러분의 수고가 주님 안에서 헛되지 않습니다.</text>
+  </g>
+  <text x="86" y="520" fill="#ffffff" font-size="30" font-weight="700" font-family="Noto Sans KR, Arial, sans-serif">고린도전서 15:57-58</text>
+  <text x="86" y="565" fill="#ffffff" opacity="0.78" font-size="20" font-family="Noto Sans KR, Arial, sans-serif">2026.07.23 · 오늘도 굳게 서서 흔들리지 마십시오</text>
+</svg>
