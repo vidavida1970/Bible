@@ -36,6 +36,7 @@
     body {
       margin: 0;
       min-height: 100vh;
+      overflow-x: hidden;
       background: #1d1610;
       color: #fff;
       font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
@@ -45,7 +46,7 @@
       padding: 54px 20px 70px;
       background:
         linear-gradient(180deg, rgba(18, 12, 8, .34), rgba(12, 8, 6, .86)),
-        url("assets/background.jpg") center/cover no-repeat fixed;
+        url("assets/background.jpg") center/cover no-repeat;
     }
     .shell {
       width: min(960px, 100%);
@@ -95,6 +96,16 @@
       font-size: 19px;
       font-weight: 800;
     }
+
+    .jump { padding: 18px 22px; border-radius: 24px; background: rgba(22, 15, 10, .88); }
+    .jump-label { margin: 0 0 12px; color: #ffe2a0; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .jump-links { display: grid; gap: 10px; }
+    .jump-links a {
+      display: flex; align-items: center; min-height: 44px; padding: 0 16px;
+      border-radius: 999px; background: rgba(255, 240, 200, .12);
+      color: #fff8e6; text-decoration: none; font-weight: 700; word-break: keep-all;
+    }
+    html { scroll-padding-top: 18px; }
     .video {
       padding: 24px;
       border-radius: 28px;
@@ -152,7 +163,17 @@
     @media (max-width: 700px) {
       .page { padding: 28px 14px 42px; background-attachment: scroll; }
       .verse { padding: 35px 21px; border-radius: 25px; }
-      .video { padding: 15px; border-radius: 22px; }
+  
+    .jump { padding: 18px 22px; border-radius: 24px; background: rgba(22, 15, 10, .88); }
+    .jump-label { margin: 0 0 12px; color: #ffe2a0; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .jump-links { display: grid; gap: 10px; }
+    .jump-links a {
+      display: flex; align-items: center; min-height: 44px; padding: 0 16px;
+      border-radius: 999px; background: rgba(255, 240, 200, .12);
+      color: #fff8e6; text-decoration: none; font-weight: 700; word-break: keep-all;
+    }
+    html { scroll-padding-top: 18px; }
+    .video { padding: 15px; border-radius: 22px; }
       blockquote { font-size: clamp(18px, 5.1vw, 25px); line-height: 1.65; }
     }
   </style>
@@ -173,8 +194,17 @@
         <div class="ref">이사야 42:1</div>
       </section>
 
-      <section class="card video">
-        <h2>▶ 소망교회 새벽기도</h2>
+      <nav class="card jump" aria-label="오늘 공식 영상 바로가기">
+        <p class="jump-label">오늘 공식 영상 3개</p>
+        <div class="jump-links">
+          <a href="#video-somang">1. 소망교회 새벽기도</a>
+          <a href="#video-cgn">2. CGN 생명의 삶</a>
+          <a href="#video-su">3. 성서유니온 매일성경</a>
+        </div>
+      </nav>
+
+      <section class="card video" id="video-somang">
+        <h2>1. 소망교회 새벽기도</h2>
         <p class="video-title">[소망교회] 이사야 강해(72) / 사 42:1~13 / 새벽기도회 / 김경진 목사 / 20260819</p>
         <div class="video-wrap">
           <iframe
@@ -188,8 +218,8 @@
         <a class="watch" href="https://youtu.be/vp5TPoE7o6o" target="_blank" rel="noopener noreferrer">▶ YouTube에서 바로 보기</a>
       </section>
 
-      <section class="card video">
-        <h2>▶ CGN 생명의 삶</h2>
+      <section class="card video" id="video-cgn">
+        <h2>2. CGN 생명의 삶</h2>
         <p class="video-title">[생명의 삶 큐티] 하나님의 영광이 머무는 거룩한 삶 |에스겔 43:1~12| 이기훈 목사 | 260819QT</p>
         <div class="video-wrap">
           <iframe
@@ -203,8 +233,8 @@
         <a class="watch" href="https://youtu.be/s8la_4xNEek" target="_blank" rel="noopener noreferrer">▶ YouTube에서 바로 보기</a>
       </section>
 
-      <section class="card video">
-        <h2>▶ 성서유니온 매일성경</h2>
+      <section class="card video" id="video-su">
+        <h2>3. 성서유니온 매일성경</h2>
         <p class="video-title">「2026년 8월 19일 | 매일성경」 부끄러움을 씻으시는 하나님 [이사야 29:15-24]</p>
         <div class="video-wrap">
           <iframe
