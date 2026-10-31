@@ -1,0 +1,35 @@
+name: Publish 2026-10-31 Bible Verse Assets
+on:
+  push:
+    paths:
+      - '2026-10-31/build_assets.py'
+      - '.github/workflows/publish-verse-20261031.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CJK fonts and Pillow
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk fonts-nanum
+          python -m pip install --quiet pillow
+      - name: Produce forest background and Kakao previews
+        run: python 2026-10-31/build_assets.py
+      - name: Commit and publish thumbnail assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-10-31/bg.jpg 2026-10-31/assets/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish 2026-10-31 John 7:16–17 thumbnails and background'
+            git push
+          fi
