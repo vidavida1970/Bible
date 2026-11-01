@@ -1,0 +1,29 @@
+name: Recover Stuck Pages Deployment 2026-11-01
+on:
+  push:
+    paths:
+      - '.github/workflows/recover-pages-20261101.yml'
+permissions:
+  contents: read
+  pages: write
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Cancel stale Pages deployment blocking recent verse publication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          status=$(curl --retry 2 --connect-timeout 15 -sS -o /tmp/pages-cancel.txt -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            'https://api.github.com/repos/vidavida1970/Bible/pages/deployments/6f1a9d03ce7cafb889fcaa4fee1a1f7edecab02a/cancel')
+          echo "Pages cancellation HTTP status: $status"
+          cat /tmp/pages-cancel.txt || true
+          if [ "$status" != '202' ] && [ "$status" != '204' ]; then
+            echo 'Pages recovery endpoint did not confirm cancellation' >&2
+            exit 1
+          fi
