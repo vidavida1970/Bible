@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build 16:9 wheat-field background and 1200×630 Korean Kakao previews for Matthew 6:19–21."""
+"""Build 16:9 sunrise landscape background and 1200×630 Korean Kakao previews for Matthew 6:19–21."""
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 import io,math,urllib.request
@@ -7,8 +7,8 @@ ROOT=Path(__file__).resolve().parent
 ASSETS=ROOT/"assets"
 ASSETS.mkdir(parents=True,exist_ok=True)
 SOURCES=[
- "https://images.unsplash.com/photo-photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2400&q=86",
- "https://images.unsplash.com/photo-photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=86",
+ "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2400&q=86",
+ "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=86",
  "https://images.unsplash.com/photo-1767948156556-29e25ccc8d3e?auto=format&fit=crop&w=2400&q=86"
 ]
 photo=None
