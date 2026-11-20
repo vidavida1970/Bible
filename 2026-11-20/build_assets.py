@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parent
 ASSETS=ROOT/"assets"
 ASSETS.mkdir(parents=True,exist_ok=True)
 SOURCES=[
- "https://unsplash.com/photos/IGeYqbvc3GY/download?force=true&w=2400",
+ "https://images.unsplash.com/photo-1591861208572-175bab50a83f?auto=format&fit=crop&w=2400&q=86",
  "https://images.unsplash.com/photo-1776806399638-9642e4ad268d?auto=format&fit=crop&w=2400&q=86",
  "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2400&q=86"
 ]
