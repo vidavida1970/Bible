@@ -1,0 +1,60 @@
+name: Verify 2026-11-27 Kakao OG thumbnail
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-kakao-20261127.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-public-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Install Pillow for image verification
+        run: python -m pip install --quiet pillow
+      - name: Verify public share HTML and public thumbnail HTTP 200
+        shell: bash
+        run: |
+          python - <<'PY'
+          import io, sys, time, urllib.request
+          from PIL import Image
+          base = 'https://vidavida1970.github.io/Bible/2026-11-27/'
+          share = base + 'kakao-share.html'
+          poster = base + 'assets/thumbnail-kakao-20261127.jpg?v=20261127'
+          headers = {'User-Agent': 'facebookexternalhit/1.1'}
+          def get(url):
+              with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=20) as r:
+                  data = r.read()
+                  print('HTTP', r.status, url, r.headers.get('Content-Type'), len(data))
+                  if r.status != 200: raise RuntimeError('not HTTP 200')
+                  return data, r.headers.get('Content-Type','')
+          for attempt in range(24):
+              try:
+                  page_bytes, page_mime = get(share)
+                  html = page_bytes.decode('utf-8')
+                  assert 'text/html' in page_mime, 'Share response not HTML'
+                  assert 'property="og:image" content="' + poster + '"' in html, 'OG image URL mismatch'
+                  assert 'property="og:url" content="' + share + '"' in html, 'OG URL mismatch'
+                  assert 'name="twitter:image" content="' + poster + '"' in html, 'Twitter image URL mismatch'
+                  assert '시편 32:7–8' in html, 'Scripture missing'
+                  assert 'G5Dk599BJPY' in html, 'YouTube ID missing'
+                  poster_bytes, poster_mime = get(poster)
+                  assert 'image/jpeg' in poster_mime, 'Thumbnail MIME not JPEG'
+                  with Image.open(io.BytesIO(poster_bytes)) as image:
+                      image.load()
+                      assert image.format == 'JPEG', image.format
+                      assert image.size == (1200,630), image.size
+                      print('THUMBNAIL VERIFIED:', image.format, image.size)
+                  main_bytes, main_mime = get(base)
+                  main_html = main_bytes.decode('utf-8')
+                  assert 'text/html' in main_mime, 'Main page not HTML'
+                  assert main_html.index('class="verse-card"') < main_html.index('class="video-card"')
+                  assert '<img' not in main_html, 'Unexpected in-page thumbnail image'
+                  print('SUCCESS: Public HTML, OG metadata, thumbnail bytes and dimension verified')
+                  break
+              except Exception as e:
+                  print('RETRY', attempt+1, repr(e))
+                  if attempt == 23: sys.exit(1)
+                  time.sleep(8)
+          PY
